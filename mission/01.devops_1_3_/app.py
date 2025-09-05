@@ -5,7 +5,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "<h1>떼스토</h1>\n<a href='/menu'><strong>/menu</strong> 로 이동</a> "
+    if app.debug:
+        hostname = '컴퓨터(인스턴스) : ' + socket.gethostname()
+    else:
+        hostname = ' '
+    return render_template('index.html', computername=hostname)
 
 # 새로운 메뉴 라우트 추가
 @app.route('/menu')
